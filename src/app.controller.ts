@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Get,Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Get,Post, Headers } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -9,6 +9,13 @@ export class AppController {
   healthCheck() {
     return true;
   }
+  
+  @Post('pay/toss')
+  @HttpCode(200)
+  async tossWebhook(@Body() body: any, @Headers() headers: any) {
+  console.log(JSON.stringify(headers, null, 2));
+  console.log(JSON.stringify(body, null, 2));
+  return 'OK';
 
   @Post('pay')
   @HttpCode(200)
