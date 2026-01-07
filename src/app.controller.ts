@@ -15,6 +15,7 @@ export class AppController {
   async tossWebhook(@Body() body: any, @Headers() headers: any) {
   console.log(JSON.stringify(headers, null, 2));
   console.log(JSON.stringify(body, null, 2));
+  }
   
   @Post('pay')
   @HttpCode(200)
