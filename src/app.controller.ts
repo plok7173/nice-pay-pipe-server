@@ -12,9 +12,10 @@ export class AppController {
   
   @Post('pay/toss')
   @HttpCode(200)
-  async tossWebhook(@Body() body: any, @Headers() headers: any) {
-  console.log(JSON.stringify(headers, null, 2));
+  async toss(@Body() body: any) {
+  console.log('[TOSS] HIT');
   console.log(JSON.stringify(body, null, 2));
+  return 'OK';
   }
   
   @Post('pay')
