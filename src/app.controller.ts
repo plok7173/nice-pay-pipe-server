@@ -16,18 +16,21 @@ export class AppController {
   @Post('pay/toss')
   @HttpCode(200)
   async tossPayWebHook(@Body() body: any) {
-    //콘솔 로그 확인 용도
-    console.log('[TOSS] HIT'); 
-    console.log(JSON.stringify(body, null, 2));
-
+    //status 상태에 따라 teams로 보낼지 안보낼지 먼저 데이터 정리
       try {
     const data = body?.data ?? {};
+    const status = data.status;
+    const ignoredStatuses = new Set(['EXPIRED', 'ABORTED']);
+    
+    if (ignoredStatuses.has(status)) {
+      console.log(`[TOSS] ${status} - ignore`);
+      return 'OK';
+    }
 
-    // ✅ 카드가 있으면 카드 정보, 없으면 easyPay.provider 사용
     const cardName = data.card?.company ?? data.easyPay?.provider ?? '없음';
     const cardNum = data.card?.number ?? null; // easyPay는 카드번호 없음
 
-    // 토스 → 나이스 PayLog 형태로 매핑
+    //토스 → 나이스 PayLog 형태로 매핑
     const payLog = {
       goodsName: data.orderName ?? ' ',
       buyerName: ' ',

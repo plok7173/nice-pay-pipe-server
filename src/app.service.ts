@@ -23,7 +23,7 @@ export class AppService {
 
   private getCardBody(paymentInfo: PayLog) {
     const isPaid =
-     paymentInfo.status === 'paid' || paymentInfo.status === 'DONE';
+      paymentInfo.status === 'paid' || paymentInfo.status === 'DONE';
 
     return {
       kind: 'PaymentWebhook',
@@ -38,8 +38,7 @@ export class AppService {
             body: [
               {
                 type: 'TextBlock',
-                text:
-                  '알림 정보 : ' + (isPaid ? '결제 완료' : '결제 취소'),
+                text: '알림 정보 : ' + (isPaid ? '결제 완료' : '결제 취소'),
               },
               {
                 type: 'TextBlock',
