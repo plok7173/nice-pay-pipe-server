@@ -23,7 +23,7 @@ async function bootstrap() {
 
   const exportPort = process.env.PORT || 3000;
   await app.listen(exportPort, () => {
-    console.log(Server is running on port ${exportPort});
+    console.log(`Server is running on port ${exportPort}`);
   });
 }
 bootstrap();

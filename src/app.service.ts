@@ -22,6 +22,9 @@ export class AppService {
   }
 
   private getCardBody(paymentInfo: PayLog) {
+    const isPaid =
+     paymentInfo.status === 'paid' || paymentInfo.status === 'DONE';
+
     return {
       kind: 'PaymentWebhook',
       attachments: [
@@ -36,8 +39,7 @@ export class AppService {
               {
                 type: 'TextBlock',
                 text:
-                  '알림 정보 : ' +
-                  (paymentInfo.status === 'paid' ? '결제 완료' : '결제 취소'),
+                  '알림 정보 : ' + (isPaid ? '결제 완료' : '결제 취소'),
               },
               {
                 type: 'TextBlock',
@@ -69,7 +71,7 @@ export class AppService {
               },
               {
                 type: 'TextBlock',
-                text: '카드 이름 : ' + (paymentInfo.cardName || '없음'),
+                text: '결제 수단 : ' + (paymentInfo.cardName || '없음'),
               },
               {
                 type: 'TextBlock',
